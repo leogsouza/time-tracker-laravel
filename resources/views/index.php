@@ -60,6 +60,39 @@
                         </span></h4>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <button class="btn btn-primary btn-xs" ng-click="showEditDialog=true">Edit</button>
+                        <button class="btn btn-danger btn-xs" ng-click="vm.deleteTimeEntry(time)">Delete</button>
+                    </div>
+                </div>
+                <div class="row edit-time-entry" ng-show="showEditDialog === true">
+                    <h4>Edit Time Entry</h4>
+                    <div class="time-entry">
+                        <div class="timepicker">
+                            <span class="timepicker-title label label-primary">Clock In</span>
+                            <uib-timepicker ng-model="time.start_time" hour-step="1" minute-step="1" show-meridian="true"></uib-timepicker>
+                        </div>
+                        <div class="timepicker">
+                            <span class="timepicker-title label label-primary">Clock Out</span>
+                            <uib-timepicker ng-model="time.end_time" hour-step="1" minute-step="1" show-meridian="true"></uib-timepicker>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <h5>User</h5>
+                        <select name="user" class="form-control" ng-model="time.user" ng-options="user.name for user in vm.users track by user.id">
+                            <option value="user.id"></option>
+                        </select>
+                    </div>
+                    <div class="col-sm-6">
+                        <h5>Comment</h5>
+                        <textarea cols="30" rows="10" class="form-control" ng-model="time.comment">{{time.comment}}</textarea>
+                    </div>
+                    <div class="edit-controls">
+                        <button class="btn btn-primary btn-sm" ng-click="vm.updateTimeEntry(time)">Save</button>
+                        <button class="btn btn-primary btn-sm" ng-click="showEditDialog = false">Close</button>
+                    </div>
+                </div>
             </div>
         </div>
 

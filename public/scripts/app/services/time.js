@@ -57,10 +57,43 @@
                 };
             }
 
+            // Grab data passed from the view and send
+            // a POST request to the API to save the data
+            function saveTime(data) {
+
+                return Time.save(data).$promise.then(function(success) {
+                    console.log('Time entry saved',success);
+                }, function(error) {
+                    console.log('Error on save Time entry',error);
+                });
+            }
+
+
+            function updateTime(data) {
+                return Time.update({id: data.id}, data).$promise.then(function(success) {
+                    console.log(success);
+                }, function(error) {
+                    console.log(error);
+                });
+            }
+
+
+            function deleteTime(id) {
+
+                return Time.delete({id: id}).$promise.then(function(success) {
+                    console.log(success);
+                }, function(error) {
+                    console.log(error);
+                });
+            }
+
             return {
                 getTime: getTime,
                 getTimeDiff: getTimeDiff,
-                getTotalTime: getTotalTime
+                getTotalTime: getTotalTime,
+                saveTime: saveTime,
+                updateTime: updateTime,
+                deleteTime: deleteTime,
             };
         }
 })();

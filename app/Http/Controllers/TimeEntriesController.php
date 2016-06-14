@@ -40,7 +40,13 @@ class TimeEntriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Grab all data passed into the request
+        $data = $request->all();
+
+        // and save a new record
+        $timeEntry = new TimeEntry();
+        $timeEntry->fill($data);
+        $timeEntry->save();
     }
 
     /**
@@ -74,7 +80,13 @@ class TimeEntriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
+        $timeEntry = TimeEntry::find($id);
+
+        $data = $request->all();
+        $timeEntry->fill($data);
+
+        $timeEntry->save();
     }
 
     /**
@@ -85,6 +97,7 @@ class TimeEntriesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $timeEntry = TimeEntry::find($id);
+        $timeEntry->delete();
     }
 }
